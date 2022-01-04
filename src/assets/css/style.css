@@ -1,0 +1,35 @@
+html { overflow-y: auto }
+
+.page{
+    display: flex;
+    height: 100vh;
+    background: rgb(228,228,228);
+    background: linear-gradient(180deg, rgba(228,228,228,1) 0%, rgba(237,237,237,1) 46%, rgba(139,139,139,1) 100%);
+}
+.content{
+    display: flex;
+}
+.content-img{
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+}
+.content-form{
+    display: flex;
+    flex: 1;
+    background: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    max-width: 400px;
+}
+.form-title{
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.658);
+}
+.red-btn{
+    color: #fff !important;
+}
