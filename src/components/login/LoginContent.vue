@@ -23,7 +23,7 @@
                                 <v-select dense :items="tecnicos" placeholder="Técnico" v-model="tecnico" outlined color="red darken-1"></v-select>
                             </v-row>
                             <v-row>
-                                <v-btn block color="red darken-1" class="red-btn" :disabled="noSelect" to="/atendimentos/">Entrar</v-btn>
+                                <v-btn block color="red darken-1" class="red-btn" :disabled="noSelect" to="/atendimentos">Entrar</v-btn>
                             </v-row>
                         </v-container>
                     </v-form>
@@ -50,9 +50,6 @@ export default {
         noSelect(){
             return this.tecnico == ''
         }
-    },
-    created(){
-        this.loadTecnicos()
     }
 }
 </script>

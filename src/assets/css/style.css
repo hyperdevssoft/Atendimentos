@@ -90,6 +90,7 @@ body, html {
     align-items: center;
 }
 .form-container{
+    display: flex;
     flex: 1;
     background: #fff;
     justify-content: center;
@@ -120,8 +121,50 @@ body, html {
         margin-left: 400px;
     }
 }
+@media (max-width: 1440px){
+    .form{
+        width: 90%;
+    }
+}
+@media (max-width: 1024px){
+    .img-container{
+        display: none;
+    }
+    .form{
+        width:50%
+    }
+}
 @media (max-width: 990px) {
     .navCustom {
         margin-left: 0;
+    }
+}
+@media (max-width: 768px){
+    .form{
+        width: 70%;
+    }
+}
+@media (max-width: 425px){
+    .form{
+        width: 95%;
+    }
+    .form-title{
+        font-size: 1rem;
+    }
+    .form-subtitle{
+        font-size: small;
+    }
+}
+@media (max-width: 375px){
+    .form-subtitle{
+        font-size: x-small;
+    }
+}
+@media (max-width: 320px){
+    .form-title{
+        font-size: small;
+    }
+    .form-subtitle{
+        font-size: x-small;
     }
 }

@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="cnpj" class="form-label">CNPJ:</label>
-                    <input type="text" class="form-control" id="cnpj" maxlength="18" onkeypress="mascara_cnpj()"/>
+                    <input type="text" class="form-control" id="cnpj" v-model="cnpj" maxlength="18" onkeypress='mascaraMutuario(this,cpfCnpj)' onblur='clearTimeout()'/>
                 </div>
                 <div class="col-md-6">
                     <div class="form-check form-check-inline">
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import '../../main'
+
 export default {
     data(){
         return{
@@ -67,7 +67,7 @@ export default {
             return this.telefone == ''
         },
         shortTelefone(){
-            return this.telefone.length < 10
+            return this.telefone.length < 14
         },
         noFantasia(){
             return this.fantasia == ''
@@ -84,6 +84,6 @@ export default {
         noAtivo(){
             return this.ativo == null
         }
-    }
+    },
 }
 </script>

@@ -6,7 +6,8 @@ const LoginBar = () => import('../components/templates/bars/LoginBar')
 const AtendimentoBar = () => import('../components/templates/bars/AtendimentoBar')
 const RootAtendimento = () => import('../components/atendimento/RootAtendimento')
 const ListAtendimento = () => import('../components/atendimento/ListAtendimento')
-const CadAtendimento = () => import('../components/atendimento/CadAtendimento')
+const CadAtendimento =  () => import('../components/atendimento/CadAtendimento')
+const EditAtendimento = () => import('../components/atendimento/EditAtendimento')
 const RootCliente = () => import('../components/cliente/RootCliente')
 const ListCliente = () => import('../components/cliente/ListCliente')
 const CadCliente = () => import('../components/cliente/CadCliente')
@@ -32,7 +33,7 @@ const routes = [
     ]
   },
   {
-    path: '/atendimentos/',
+    path: '/atendimentos',
     components:{
       page: RootAtendimento
     },
@@ -42,13 +43,22 @@ const routes = [
         components:{
           appbar: AtendimentoBar,
           content: ListAtendimento
-        }
+        },
       },
       {
         path: 'cadastro/',
         components:{
           appbar: AtendimentoBar,
           content: CadAtendimento
+        }
+      },
+      {
+        path: ':codigo/editar/',
+        props: true,
+        name: 'editarAtendimento',
+        components:{
+          appbar: AtendimentoBar,
+          content: EditAtendimento
         }
       }
     ]

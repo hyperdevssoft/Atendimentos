@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-12">
                     <label for="relato" class="form-label">Relato</label>
-                    <textarea class="form-control" id="relato" rows="5" v-model="relato" maxlength="299"></textarea>
+                    <textarea class="form-control" id="relato" rows="5" v-model="relato" maxlength="399"></textarea>
                 </div>
                 <div class="col-md-6">
                     <div class="form-check form-check-inline">
@@ -33,7 +33,8 @@
                 </div>
                 <div class="col-12 mt-5">
                     <button type="submit" class="btn btn-red"
-                    :disabled="noTecnico || tecnicoNotSelected || noCliente || noRelato || noAtivo || clienteNotSelected || shortRelato">Gravar Atendimento</button>
+                    :disabled="noTecnico || tecnicoNotSelected || noCliente || noRelato || noAtivo || 
+                    clienteNotSelected || shortRelato">Gravar Atendimento</button>
                     <router-link to="/atendimentos">
                         <a class="btn btn-black ml-2"> Voltar </a>
                     </router-link>
@@ -51,7 +52,7 @@
                 cliente: 'Selecione o Cliente',
                 relato: '',
                 tecnicos:['Daniel', 'Diego', 'Heitor', 'Jaílson', 'Luiz Felipe', 'Rudielle', 'Richard', 'Rickson'],
-                clientes:['Daniel', 'Diego', 'Heitor', 'Jaílson', 'Luiz Felipe', 'Rudielle', 'Richard', 'Rickson'],
+                clientes:['Polo Norte', 'Mega Leite', 'Leal', 'Udipres', 'Cozini'],
                 ativo: null
             }
         },

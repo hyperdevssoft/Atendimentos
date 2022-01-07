@@ -1,62 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="Hypersoft - Atendimentos" />
-    <title>Hypersoft - Atendimentos</title>
-    <link rel="icon" href="https://img.icons8.com/material-outlined/24/fa314a/h.png"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/ca276b45ef.js" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
-  <script>
-    function mascara_cnpj() {
-      var cnpj = document.getElementById('cnpj')
-      if (cnpj.value.length == 2 || cnpj.value.length == 6 ) {
-        cnpj.value += "."
-      }
-      else if (cnpj.value.length == 10) {
-        cnpj.value += "/"
-      }
-      else if (cnpj.value.length == 15) {
-        cnpj.value += "-"
-      }
-    }
-
-    function mask(o, f) {
-      setTimeout(function() {
-        var v = mphone(o.value);
-        if (v != o.value) {
-          o.value = v;
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="description" content="Hypersoft - Atendimentos" />
+        <title>Hypersoft - Atendimentos</title>
+        <link rel="icon" href="https://img.icons8.com/material-outlined/24/fa314a/h.png"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/ca276b45ef.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@lacussoft/cnpj-fmt@latest/dist/cnpj-fmt.min.js"></script>
+    </head>
+    <body>
+        <noscript>
+            <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        </noscript>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
+    </body>
+    <script>
+        function mask(o, f) {
+            setTimeout(function() {
+                var v = mphone(o.value);
+                if (v != o.value) {
+                    o.value = v;
+                }
+            }, 1);
         }
-      }, 1);
-    }
+        function mphone(v) {
+            var r = v.replace(/\D/g, "")
+            r = r.replace(/^0/, "")
+            if (r.length > 10) {
+                r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3")
+            } 
+            else if (r.length > 5) {
+                r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3")
+            } 
+            else if (r.length > 2) {
+                r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2")
+            } 
+            else {
+                r = r.replace(/^(\d*)/, "($1)")
+            }
+            return r
+        }
+    </script>
 
-    function mphone(v) {
-      var r = v.replace(/\D/g, "");
-      r = r.replace(/^0/, "");
-      if (r.length > 10) {
-        r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
-      } else if (r.length > 5) {
-        r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-      } else if (r.length > 2) {
-        r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
-      } else {
-        r = r.replace(/^(\d*)/, "($1");
-      }
-      return r;
-    }
-  </script>
+    <script>
+        function mascaraMutuario(o,f){
+            v_obj=o
+            v_fun=f
+            setTimeout('execmascara()',1)
+        }
+        function execmascara(){
+            v_obj.value=v_fun(v_obj.value)
+        }
+        function cpfCnpj(v){
+            v=v.replace(/\D/g,"")
+            if (v.length <= 14) {
+                v=v.replace(/(\d{3})(\d)/,"$1.$2")
+                v=v.replace(/(\d{3})(\d)/,"$1.$2")
+                v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+            } else {
+                v=v.replace(/^(\d{2})(\d)/,"$1.$2")
+                v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
+                v=v.replace(/\.(\d{3})(\d)/,".$1/$2")
+                v=v.replace(/(\d{4})(\d)/,"$1-$2")
+            }
+            return v
+        }
+    </script>
 </html>
