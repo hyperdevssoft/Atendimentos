@@ -54,7 +54,7 @@
                 return this.telefone == ''
             },
             shortTelefone(){
-                return this.telefone.length < 10
+                return this.telefone.length < 14
             },
             noAtivo(){
                 return this.ativo == null
