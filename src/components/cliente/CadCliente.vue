@@ -18,7 +18,8 @@
                 </div>
                 <div class="col-md-6">
                     <label for="cnpj" class="form-label">CNPJ:</label>
-                    <input type="text" class="form-control" id="cnpj" v-model="cnpj" maxlength="18" onkeypress='mascaraMutuario(this,cpfCnpj)' onblur='clearTimeout()'/>
+                    <input type="text" class="form-control" id="cnpj" v-model="cnpj" 
+                    name="cpfcnpj" onkeypress='mascaraMutuario(this, cpfCnpj)' onblur='clearTimeout()'/>
                 </div>
                 <div class="col-md-6">
                     <div class="form-check form-check-inline">
@@ -31,11 +32,9 @@
                     </div>
                 </div>
                 <div class="col-12 mt-5">
-                    <button type="submit" class="btn btn-red" 
-                    :disabled="noNome || noTelefone || noFantasia || noCpnj || noAtivo || 
-                    shortCpnj || shortNome || shortTelefone || shortFantasia"
-                    >Cadastrar Cliente</button>
-                    <router-link to="/atendimentos/">
+                    <button class="btn btn-red" :disabled="noNome || noTelefone || noFantasia || noAtivo || 
+                    shortCpnj || shortNome || shortTelefone || shortFantasia">Cadastrar Cliente</button>
+                    <router-link to="/clientes/">
                         <a class="btn btn-dark ml-2"> Voltar </a>
                     </router-link>
                 </div>
@@ -45,7 +44,6 @@
 </template>
 
 <script>
-
 export default {
     data(){
         return{
@@ -53,7 +51,7 @@ export default {
             telefone: '',
             fantasia: '',
             cnpj: '',
-            ativo: null
+            ativo: null,
         }
     },
     computed:{
@@ -74,9 +72,6 @@ export default {
         },
         shortFantasia(){
             return this.fantasia.length < 3
-        },
-        noCpnj(){
-            return this.cnpj == ''
         },
         shortCpnj(){
             return this.cnpj.length < 14
