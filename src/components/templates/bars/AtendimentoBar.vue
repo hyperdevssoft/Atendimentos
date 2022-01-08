@@ -23,11 +23,11 @@
                             </router-link>
                         </li>
                         <li class="nav-item mr-2">
-                            <router-link to="/tecnicos/cadastro" class="link">
+                            <router-link to="/tecnicos" class="link">
                                 <div class="bar-list-item">
                                     <v-icon color="red darken-1">mdi-face-agent</v-icon>
                                     <a class="nav-link">
-                                        <router-link to="/tecnicos/cadastro/" class="link" active-class="link-active">
+                                        <router-link to="/tecnicos" class="link" active-class="link-active">
                                             Técnico
                                         </router-link>
                                     </a>
@@ -35,11 +35,11 @@
                             </router-link>
                         </li>
                         <li class="nav-item mr-2">
-                            <router-link to="/clientes/cadastro" class="link">
+                            <router-link to="/clientes" class="link">
                                 <div class="bar-list-item">
                                     <v-icon color="red darken-1">mdi-account-group-outline</v-icon>
                                     <a class="nav-link" >
-                                        <router-link to="/clientes/cadastro/" class="link" active-class="link-active">
+                                        <router-link to="/clientes" class="link" active-class="link-active">
                                             Cliente
                                         </router-link>
                                     </a>

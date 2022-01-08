@@ -25,7 +25,7 @@
                 <div class="col-12 mt-5">
                     <button type="submit" class="btn btn-red"
                     :disabled="noNome || noTelefone || noAtivo || shortNome || shortTelefone">Cadastrar Técnico</button>
-                    <router-link to="/atendimentos/">
+                    <router-link to="/tecnicos">
                         <a class="btn btn-black ml-2"> Voltar </a>
                     </router-link>
                 </div>
