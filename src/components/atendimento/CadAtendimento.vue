@@ -5,35 +5,19 @@
             <form class="row g-3 mt-5">
                 <div class="col-md-6">
                     <label for="selectTecnico" class="form-label">Técnico</label>
-                    <select class="form-control" v-model="tecnico" id="selectTecnico">
-                        <option selected>Selecione o Técnico</option>
-                        <option v-for="(tecnico, i) in tecnicos" :key="i">{{tecnico}}</option>
-                    </select>
+                    <v-select :items="tecnicos" outlined dense placeholder="Selecione o Técnico" v-model="tecnico"></v-select>
                 </div>
                 <div class="col-md-6">
                     <label for="client" class="form-label">Cliente / Razão Social</label>
-                    <select class="form-control" v-model="cliente" id="selectCliente">
-                        <option selected>Selecione o Cliente</option>
-                        <option v-for="(cliente, i) in clientes" :key="i">{{cliente}}</option>
-                    </select>
+                    <v-select :items="clientes" outlined dense placeholder="Selecione o Cliente" v-model="cliente"></v-select>
                 </div>
                 <div class="col-12">
                     <label for="relato" class="form-label">Relato</label>
-                    <textarea class="form-control" id="relato" rows="5" v-model="relato" maxlength="399"></textarea>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" @click="ativo = true"/>
-                        <label class="form-check-label" for="inlineRadio1">Ativo</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" @click="ativo = false"/>
-                        <label class="form-check-label" for="inlineRadio2">Inativo</label>
-                    </div>
+                    <v-textarea id="relato" rows="5" v-model="relato" maxlength="399" :rules="[rules.relato, rules.required]" outlined></v-textarea>
                 </div>
                 <div class="col-12 mt-5">
                     <button type="submit" class="btn btn-red"
-                    :disabled="noTecnico || tecnicoNotSelected || noCliente || noRelato || noAtivo || 
+                    :disabled="noTecnico || tecnicoNotSelected || noCliente || noRelato ||
                     clienteNotSelected || shortRelato">Gravar Atendimento</button>
                     <router-link to="/atendimentos">
                         <a class="btn btn-black ml-2"> Voltar </a>
@@ -73,10 +57,17 @@
                 return this.relato == ""
             },
             shortRelato(){
-                return this.relato < 15
+                if(this.relato.length > 0){
+                    return this.relato.length < 10
+                }else{
+                    return this.relato.length > 0
+                }
             },
             noAtivo(){
                 return this.ativo == null
+            },
+            rules(){
+                return this.$store.getters.rules
             }
         }
     }

@@ -5,17 +5,11 @@
             <form class="row g-3 mt-5">
                 <div class="col-md-6">
                     <label for="selectTecnico" class="form-label">Técnico</label>
-                    <select id="selectTecnico" class="form-select">
-                        <option selected v-text="tecnico"></option>
-                        <option v-for="(tecnico, i) in tecnicos" :key="i" v-text="tecnico"></option>
-                    </select>
+                    <v-select :items="tecnicos" outlined dense placeholder="Selecione o Tecnico" v-model="tecnico"></v-select>
                 </div>
                 <div class="col-md-6">
                     <label for="client" class="form-label">Cliente / Razão Social</label>
-                    <select id="selectCliente" class="form-select">
-                        <option selected v-text="cliente"></option>
-                        <option v-for="(cliente, i) in clientes" :key="i" v-text="cliente"></option>
-                    </select>
+                    <v-select :items="clientes" outlined dense placeholder="Selecione o Cliente" v-model="cliente"></v-select>
                 </div>
                 <div class="col-12">
                     <label for="relato" class="form-label">Relato</label>

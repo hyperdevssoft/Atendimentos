@@ -2,8 +2,16 @@
     <v-container fluid class="content pa-0 ma-0">
         <div class="container mt-5">
             <h1 class="title mt-5">Técnicos Hypersoft</h1>
-            <v-data-table :headers="headers" :items="tecnicos" 
-            :items-per-page="5" class="elevation-1 mt-5"></v-data-table>
+            <template>
+                <v-card>
+                    <v-card-title>
+                        <v-text-field v-model="search" append-icon="mdi-magnify" label="Pesquisa rápida"
+                        single-line hide-details></v-text-field>
+                    </v-card-title>
+                    <v-data-table :headers="headers" :items="tecnicos" :search="search"
+                    :items-per-page="5" class="elevation-1 mt-5"></v-data-table>
+                </v-card>
+            </template>
             <router-link to="/tecnicos/cadastro/">
                 <a type="button" class="btn btn-red mt-5">Cadastrar Técnico</a>
             </router-link>
@@ -18,6 +26,7 @@
 export default {
     data(){
         return{
+            search: '',
             headers: [
                     {
                         text: '#',

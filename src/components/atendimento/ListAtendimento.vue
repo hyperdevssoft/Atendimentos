@@ -2,37 +2,27 @@
     <v-container fluid class="content pa-0 ma-0">
         <div class="container mt-5">
             <h1 class="title mt-5">Atendimentos Hypersoft</h1>
-            <table class="table mt-5 mb-4">
-                <thead>
-                    <tr>
-                        <th scope="col-1">#</th>
-                        <th scope="col-1">Técnico</th>
-                        <th scope="col-1">Cliente / Razão Social</th>
-                        <th scope="col-2">Relato</th>
-                        <th scope="col-1">Data</th>
-                        <th scope="col-1">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(atendimento, i) in atendimentos" :key="i">
-                        <th scope="row" v-text="i+1"></th>
-                        <td v-text="atendimento.tecnico"></td>
-                        <td v-text="atendimento.cliente"></td>
-                        <td v-text="atendimento.relato"></td>
-                        <td v-text="atendimento.date"></td>
-                        <td>
-                            <router-link tag="button" :to="{name: 'editarAtendimento', params:{codigo: i+1},
-                            query:{atendimento: atendimento}}">
-                                <a class="edit">
-                                    <i class="fas fa-edit"></i> Editar
-                                </a>
-                            </router-link>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <template>
+                <v-card>
+                    <v-card-title>
+                        <v-text-field v-model="search" append-icon="mdi-magnify" label="Pesquisa rápida"
+                        single-line hide-details></v-text-field>
+                    </v-card-title>
+                    <v-data-table :headers="header" :items="atendimentos" :items-per-page="5" 
+                    class="elevation-1 mt-5" :search="search">
+                        <template v-slot:[`item.actions`]="{ item }">
+                            <v-btn :to="{ name: 'editarAtendimento', params:{codigo: item.codigo}, query:{atendimento: item}}" 
+                            class="edit" plain icon >
+                                <v-icon small class="mr-2">
+                                    mdi-pencil
+                                </v-icon>
+                            </v-btn>
+                        </template>
+                    </v-data-table>
+                </v-card>
+            </template>
             <router-link to="/atendimentos/cadastro/">
-                <a type="button" class="btn btn-red">Cadastrar Atendimento</a>
+                <a type="button" class="btn btn-red mt-5">Cadastrar Atendimento</a>
             </router-link>
         </div>
     </v-container>
@@ -42,14 +32,24 @@
 export default {
     data(){
         return{
+            search: '',
+            dialog: false,
+            header:[
+                {text: '#', align: 'start', sortable: 'true', value: 'codigo' },
+                {text: 'Técnico', value: 'tecnico'},
+                {text: 'Cliente', value: 'cliente'},
+                {text: 'Relato', value: 'relato'},
+                {text: 'Data', value: 'date'},
+                {text: 'Ações', value: 'actions', sortable: false}
+            ],
             atendimentos:[
-                {tecnico:'Rickson', cliente:'Polo Norte', relato: 'Emissão de certificado digital', ativo: true, date:'07/01/2022'},
-                {tecnico:'Jaílson', cliente:'Mega Leite', relato:'Dúvidas NFe', ativo: true, date:'07/01/2022'},
-                {tecnico:'Luiz Felipe', cliente:'Udipres', relato:'Atualização de certificado digital', ativo: false, date:'07/01/2022'},
-                {tecnico:'Daniel', cliente:'Leal', relato:'Instalação de sistema', ativo: true, date:'07/01/2022'},
-                {tecnico:'Rudielle', cliente:'Cozini', relato:'Balanço com corretor', ativo: true, date:'07/01/2022'}
+                {codigo: '1', tecnico:'Rickson', cliente:'Polo Norte', relato: 'Emissão de certificado digital', ativo: true, date:'07/01/2022'},
+                {codigo: '2', tecnico:'Jaílson', cliente:'Mega Leite', relato:'Dúvidas NFe', ativo: true, date:'07/01/2022'},
+                {codigo: '3', tecnico:'Luiz Felipe', cliente:'Udipres', relato:'Atualização de certificado digital', ativo: false, date:'07/01/2022'},
+                {codigo: '4', tecnico:'Daniel', cliente:'Leal', relato:'Instalação de sistema', ativo: true, date:'07/01/2022'},
+                {codigo: '5', tecnico:'Rudielle', cliente:'Cozini', relato:'Balanço com corretor', ativo: true, date:'07/01/2022'}
             ]
         }
-    },
+    }
 }
 </script>
