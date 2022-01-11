@@ -5,7 +5,7 @@
             <form class="row g-3 mt-5">
                 <div class="col-md-6">
                     <label for="nome_cliente" class="form-label">Nome:</label>
-                    <v-text-field type="text" id="nome_cliente" outlined dense
+                    <v-text-field type="text" id="nome_cliente" outlined dense spellcheck="false"
                     v-model="nome" max-length="255" :rules="[rules.required, rules.nome]"></v-text-field>
                 </div>
                 <div class="col-md-6">
@@ -15,13 +15,13 @@
                 </div>
                 <div class="col-md-6">
                     <label for="nome_fantasia" class="form-label">Nome Fantasia:</label>
-                    <v-text-field type="text" id="fantasia_cliente" outlined dense v-model="fantasia" maxlength="255" 
+                    <v-text-field type="text" id="fantasia_cliente" outlined dense v-model="fantasia" maxlength="255" spellcheck="false"
                     :rules="[rules.required, rules.nome]"></v-text-field>
                 </div>
                 <div class="col-md-6">
                     <label for="cnpj" class="form-label">CNPJ:</label>
-                    <v-text-field type="text" outlined dense v-model="cnpj" maxlength="14" id="cnpj_cliente"
-                    :rules="[rules.cnpj]"></v-text-field>
+                    <v-text-field type="text" outlined dense v-model="cnpj" maxlength="18" id="cnpj_cliente" name="cpfcnpj"
+                    :rules="[rules.cnpj]" onkeypress="mascaraMutuario(this,cpfCnpj)"  onblur='clearTimeout()'></v-text-field>
                 </div>
                 <div class="col-md-6">
                     <div class="form-check form-check-inline">
@@ -98,5 +98,16 @@ export default {
             return this.$store.getters.rules
         }
     },
+    beforeRouteLeave(to, from, next){
+        if(this.nome == '' && this.telefone == '' && this.fantasia == '' && this.cnpj == ''){
+            next()
+        }else{
+            if(confirm('Seus dados serão perdidos, tem certeza disso ?')){
+                next()
+            }else{
+                next(false)
+            }
+        }
+    }
 }
 </script>

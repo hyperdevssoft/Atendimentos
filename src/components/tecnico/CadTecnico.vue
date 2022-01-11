@@ -6,12 +6,12 @@
                 <div class="col-md-6">
                     <label for="nome_tecnico" class="form-label">Nome:</label>
                     <v-text-field type="text" id="nome_tecnico" outlined dense v-model="nome" maxlength="255" 
-                    :rules="[rules.required, rules.nome]"></v-text-field>
+                    :rules="[rules.required, rules.nome]" spellcheck="false"></v-text-field>
                 </div>
                 <div class="col-md-6">
                     <label for="telefone_tecnico" class="form-label">Telefone:</label>
-                    <v-text-field type="text" id="telefone_tecnico" v-model="telefone" maxlength="15" onkeypress="mask(this, mphone)"
-                    onblur="mask(this, mphone);" outlined dense :rules="[rules.celular]"></v-text-field>
+                    <v-text-field type="text" id="telefone_tecnico" v-model="telefone" maxlength="14" onkeypress="mask(this, mphone)"
+                    onblur="mask(this, mphone);" outlined dense :rules="[rules.telefone]"></v-text-field>
                 </div>
                 <div class="col-md-6">
                     <div class="form-check form-check-inline">
@@ -41,7 +41,7 @@
             return{
                 nome: '',
                 telefone: '',
-                ativo: null
+                ativo: true
             }
         },
         computed:{
@@ -56,7 +56,7 @@
             },
             shortTelefone(){
                 if(this.telefone.length > 0){
-                    return this.telefone.length < 15
+                    return this.telefone.length < 14
                 }else{
                     return this.telefone.length > 0
                 }
@@ -67,6 +67,17 @@
             },
             rules(){
                 return this.$store.getters.rules
+            }
+        },
+        beforeRouteLeave(to, from, next){
+            if(this.nome == '' && this.telefone == ''){
+                next()
+            }else{
+                if(confirm('Seus dados serão perdidos, tem certeza disso ?')){
+                    next()
+                }else{
+                    next(false)
+                }
             }
         }
     }
