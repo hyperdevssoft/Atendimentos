@@ -1,14 +1,5 @@
+/* STYLE ITEMS */
 html { overflow-y: auto }
-
-.page{
-    display: flex;
-    height: 100vh;
-    background: rgb(228,228,228);
-    background: linear-gradient(180deg, rgba(228,228,228,1) 0%, rgba(237,237,237,1) 46%, rgba(139,139,139,1) 100%);
-}
-.content{
-    display: flex;
-}
 
 body, html {
     font-family: 'Roboto', sans-serif;
@@ -31,14 +22,42 @@ body, html {
     margin-left: 600px;
 }
 
+.page{
+    display: flex;
+    height: 100vh;
+    background: rgb(228,228,228);
+    background: linear-gradient(180deg, rgba(228,228,228,1) 0%, rgba(237,237,237,1) 46%, rgba(139,139,139,1) 100%);
+}
+
+.img-container{
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container{
+    display: flex;
+    flex: 1;
+    background: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    width: 90%;
+}
+
+/* STYLE TEXT*/
 .title {
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 38px;
+    font-weight: 500;
+    font-size: 1rem;
     position: relative;
     text-align: center;
     user-select: none;
     margin-bottom: 25px;
+    color: #434343;
 }
 
 .title::after {
@@ -50,10 +69,24 @@ body, html {
     margin: 10px auto;
 }
 
+.form-title{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.658);
+}
+
+.form-subtitle{
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.658);
+}
+
+/* STYLE BUTTONS/LINKS*/
 .edit {
     text-decoration: none;
     color: #212529 !important;
 }
+
 .edit:hover {
     color: #ed3030 !important;
 }
@@ -61,15 +94,21 @@ body, html {
 .btn{
     color: #fff !important;
 }
+
 .btn-red {
     background: #ed3030 !important;
 }
+
 .btn-red:hover {
     background: #434343 !important;
 }
 
 .btn-black {
-    background: #000000d3 !important;
+    background: #1d1d1dd3 !important;
+}
+
+.btn-black:hover{
+    background: #0c0c0cd3 !important;
 }
 
 .link{
@@ -78,9 +117,11 @@ body, html {
     color: #43434391 !important;
     user-select: none;
 }
+
 .link:hover{
-    color: #ed3030 !important;
+    color: #0e0e0e !important;
 }
+
 .link-active{
     color: #ed3030 !important;
 }
@@ -90,39 +131,6 @@ body, html {
     align-items: center;
 }
 
-/* LOGIN CONTENT */
-.img-container{
-    flex: 2;
-    justify-content: center;
-    align-items: center;
-}
-.form-container{
-    display: flex;
-    flex: 1;
-    background: #fff;
-    justify-content: center;
-    align-items: center;
-}
-.form{
-    width: 80%;
-}
-.form-title{
-    font-family: 'Roboto';
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.658);
-}
-.form-subtitle{
-    font-family: 'Roboto';
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.658);
-}
-.red-btn{
-    color: #fff !important;
-}
-
-/* CadAtendimento */
 .btn-dialog{
     color: rgba(0, 0, 0, 0.644);
     font-size: small;

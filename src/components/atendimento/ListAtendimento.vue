@@ -17,18 +17,15 @@
                     :items-per-page="itemsPerPage" hide-default-footer :page.sync="page" @page-count="pageCount = $event">
                         <template v-slot:[`item.actions`]="{ item }">
                             <v-btn :to="{ name: 'editarAtendimento', params:{codigo: item.codigo}, query:{atendimento: item}}" 
-                            class="edit" plain icon >
-                                <v-icon small class="mr-2">
+                            class="edit" plain icon>
+                                <v-icon small>
                                     mdi-pencil
                                 </v-icon>
                             </v-btn>
                         </template>
                     </v-data-table>
-                    <div class="text-center pt-2 pb-2">
-                        <v-pagination
-                            v-model="page"
-                            :length="pageCount"
-                        ></v-pagination>
+                    <div class="pt-2 pb-2">
+                        <v-pagination v-model="page" :length="pageCount"></v-pagination>
                     </div>
                 </v-card>
             </template>

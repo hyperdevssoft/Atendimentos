@@ -71,9 +71,6 @@ export default {
         shortNome(){
             return this.nome.length < 3
         },
-        noTelefone(){
-            return this.telefone == ''
-        },
         shortTelefone(){
             if(this.telefone.length > 0){
                 return this.telefone.length < 14
@@ -91,9 +88,6 @@ export default {
             }else{
                 return this.fantasia.length > 0
             }
-        },
-        noAtivo(){
-            return this.ativo == null
         }
     }
 }

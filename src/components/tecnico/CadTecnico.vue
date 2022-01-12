@@ -1,8 +1,8 @@
 <template>
-    <main class="main mt-5" id="main">
+    <main class="main" id="main">
         <div class="container">
             <h1 class="title">Cadastro de Técnico</h1>
-            <form class="row g-3 mt-5">
+            <form class="row g-3">
                 <div class="col-md-6">
                     <label for="nome_tecnico" class="form-label">Nome:</label>
                     <v-text-field type="text" id="nome_tecnico" outlined dense v-model="nome" maxlength="255" 
@@ -27,7 +27,7 @@
                     <button type="submit" class="btn btn-red"
                     :disabled="noNome || shortNome || shortTelefone">Cadastrar Técnico</button>
                     <router-link to="/tecnicos">
-                        <a class="btn btn-black ml-2"> Voltar </a>
+                        <a class="btn btn-black ml-2"> Voltar</a>
                     </router-link>
                 </div>
             </form>
@@ -51,9 +51,6 @@
             shortNome(){
                 return this.nome.length < 3
             },
-            noTelefone(){
-                return this.telefone == ''
-            },
             shortTelefone(){
                 if(this.telefone.length > 0){
                     return this.telefone.length < 14
@@ -61,9 +58,6 @@
                     return this.telefone.length > 0
                 }
                 
-            },
-            noAtivo(){
-                return this.ativo == null
             },
             rules(){
                 return this.$store.getters.rules

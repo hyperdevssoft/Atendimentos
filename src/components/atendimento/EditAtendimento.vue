@@ -1,8 +1,8 @@
 <template>
     <main id="main">
-        <div class="container mt-5">
-            <h1 class="title mt-5">Editar Atendimento</h1>
-            <form class="row g-3 mt-5">
+        <div class="container">
+            <h1 class="title">Editar Atendimento</h1>
+            <form class="row g-3">
                 <div class="col-md-6">
                     <v-layout justify-space-between>
                         <label for="selectTecnico" class="form-label">Técnico</label>
@@ -66,7 +66,6 @@ export default {
             cliente: this.$route.query.atendimento.cliente,
             relato: this.$route.query.atendimento.relato,
             ativo: this.$route.query.atendimento.ativo,
-            rel: ''
         }
     },
     computed:{
@@ -91,9 +90,6 @@ export default {
             }else{
                 return this.relato.length > 0
             }
-        },
-        noAtivo(){
-            return this.ativo == null
         },
         rules(){
             return this.$store.getters.rules

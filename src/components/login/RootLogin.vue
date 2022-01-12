@@ -1,5 +1,5 @@
 <template>
-    <div class="page">
+    <div>
         <router-view name="appbar"></router-view>
         <LoginContent></LoginContent>
     </div>
