@@ -4,40 +4,39 @@
             <h1 class="title mt-5">Editar Atendimento</h1>
             <form class="row g-3 mt-5">
                 <div class="col-md-6">
-                    <label for="selectTecnico" class="form-label">Técnico</label>
-                    <select id="selectTecnico" class="form-select">
-                        <option selected v-text="tecnico"></option>
-                        <option v-for="(tecnico, i) in tecnicos" :key="i" v-text="tecnico"></option>
-                    </select>
+                    <v-layout justify-space-between>
+                        <label for="selectTecnico" class="form-label">Técnico</label>
+                        <v-dialog v-model="cadTecDialog" persistent max-width="600px">
+                            <template v-slot:activator="{on, attrs}">
+                                <span class="btn-dialog" v-bind="attrs" v-on="on">Deseja criar um novo Técnico ?</span>
+                            </template>
+                            <CadTecAtend></CadTecAtend>
+                        </v-dialog>
+                    </v-layout>
+                    <v-select :items="tecnicos" outlined dense placeholder="Selecione o Tecnico" v-model="tecnico"
+                    hide-selected></v-select>
                 </div>
                 <div class="col-md-6">
-                    <label for="client" class="form-label">Cliente / Razão Social</label>
-                    <select id="selectCliente" class="form-select">
-                        <option selected v-text="cliente"></option>
-                        <option v-for="(cliente, i) in clientes" :key="i" v-text="cliente"></option>
-                    </select>
+                    <v-layout justify-space-between>
+                        <label for="client" class="form-label">Cliente / Razão Social</label>
+                        <v-dialog v-model="cadCliDialog" persistent max-width="600px">
+                            <template v-slot:activator="{on, attrs}">
+                                <span class="btn-dialog" v-bind="attrs" v-on="on">Deseja criar um novo Cliente ?</span>
+                            </template>
+                            <CadCliAtend></CadCliAtend>
+                        </v-dialog>
+                    </v-layout>
+                    <v-select :items="clientes" outlined dense placeholder="Selecione o Cliente" v-model="cliente"
+                    hide-selected></v-select>
                 </div>
                 <div class="col-12">
                     <label for="relato" class="form-label">Relato</label>
-                    <textarea class="form-control" id="relato" rows="5" v-model="relato"></textarea>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" @click="ativo = true"/>
-                        <input class="form-check-input" type="radio" checked name="inlineRadioOptions" id="inlineRadio1" 
-                        value="1" @click="ativo = true" v-if="$route.query.atendimento.ativo == true"/>
-                        <label class="form-check-label" for="inlineRadio1">Ativo</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0" @click="ativo = false"/>
-                        <input class="form-check-input" type="radio" checked name="inlineRadioOptions" id="inlineRadio2" 
-                        value="0" @click="ativo = false" v-if="$route.query.atendimento.ativo == false"/>
-                        <label class="form-check-label" for="inlineRadio2">Inativo</label>
-                    </div>
+                    <v-textarea id="relato" rows="5" v-model="relato" :rules="[rules.relato, rules.required]" 
+                    maxlength="399" outlined spellcheck="false"></v-textarea>
                 </div>
                 <div class="col-12 mt-5">
                     <button type="submit" class="btn btn-red mr-2" 
-                    :disabled="noTecnico || tecnicoNotSelected || noCliente || noRelato || noAtivo || clienteNotSelected || shortRelato">
+                    :disabled="noTecnico || tecnicoNotSelected || noCliente || clienteNotSelected || shortRelato || noRelato">
                         Atualizar Atendimento
                     </button>
                     <router-link to="/atendimentos" tag="button">
@@ -50,8 +49,15 @@
 </template>
 
 <script>
+const CadTecAtend = () => import('../templates/dialogs/CadTecAtend')
+const CadCliAtend = () => import('../templates/dialogs/CadClienteAtend.vue')
+
 export default {
     props:['codigo'],
+    components:{
+        CadTecAtend,
+        CadCliAtend
+    },
     data(){
         return{
             tecnicos:['Daniel', 'Diego', 'Heitor', 'Jaílson', 'Luiz Felipe', 'Rudielle', 'Richard', 'Rickson'],
@@ -60,6 +66,7 @@ export default {
             cliente: this.$route.query.atendimento.cliente,
             relato: this.$route.query.atendimento.relato,
             ativo: this.$route.query.atendimento.ativo,
+            rel: ''
         }
     },
     computed:{
@@ -79,10 +86,44 @@ export default {
             return this.relato == ""
         },
         shortRelato(){
-            return this.relato < 15
+            if(this.relato.length > 0){
+                return this.relato.length < 10
+            }else{
+                return this.relato.length > 0
+            }
         },
         noAtivo(){
             return this.ativo == null
+        },
+        rules(){
+            return this.$store.getters.rules
+        },
+        cadCliDialog:{
+            get(){
+                return this.$store.getters.cadCliDialog
+            },
+            set(cadCliDialog){
+                this.$store.commit('setCadCliDialog', cadCliDialog)
+            }
+        },
+        cadTecDialog:{
+            get(){
+                return this.$store.getters.cadTecDialog
+            },
+            set(cadTecDialog){
+                this.$store.commit('setCadTecDialog', cadTecDialog)
+            }
+        }
+    },
+    beforeRouteLeave(to, from, next){
+        if(this.relato == '' && this.tecnico == '' && this.cliente == ''){
+            next()
+        }else{
+            if(confirm('Seus dados serão perdidos. Tem certeza ?')){
+                next()
+            }else{
+                next(false)
+            }
         }
     }
 }

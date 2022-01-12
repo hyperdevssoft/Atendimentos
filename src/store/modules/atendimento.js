@@ -2,11 +2,19 @@ import Vue from 'vue'
 
 export default {
     state:{
-        atendimentos: []
+        atendimentos: [],
+        cadCliDialog: false,
+        cadTecDialog: false
     },
     mutations:{
         setAtendimentos(state, atendimentos){
             state.atendimentos = atendimentos
+        },
+        setCadCliDialog(state, cadCliDialog){
+            state.cadCliDialog = cadCliDialog
+        },
+        setCadTecDialog(state, cadTecDialog){
+            state.cadTecDialog = cadTecDialog
         }
     },
     actions:{
@@ -22,6 +30,12 @@ export default {
     getters:{
         atendimentos(state){
             return state.atendimentos
+        },
+        cadCliDialog(state){
+            return state.cadCliDialog
+        },
+        cadTecDialog(state){
+            return state.cadTecDialog
         }
     }
 }
