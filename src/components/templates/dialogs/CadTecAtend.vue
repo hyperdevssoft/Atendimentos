@@ -17,7 +17,7 @@
                 </v-col>
             </v-row>
             <div class="col-12 mt-5">
-                <button type="submit" class="btn btn-red" @click="cadTecDialog = false"
+                <button  class="btn btn-red" @click="cadTecDialog = false"
                 :disabled="noNome || shortNome || shortTelefone">Cadastrar Técnico</button>
                 <a class="btn btn-black ml-2" @click="cadTecDialog = false"> Voltar </a>
             </div>

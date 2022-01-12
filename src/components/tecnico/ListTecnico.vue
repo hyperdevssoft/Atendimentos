@@ -17,10 +17,7 @@
                     <v-data-table :headers="headers" :items="tecnicos" :search="search" class="elevation-1 mt-5" dense
                     :items-per-page="itemsPerPage" hide-default-footer :page.sync="page" @page-count="pageCount = $event"></v-data-table>
                     <div class="text-center pt-2 pb-2">
-                        <v-pagination
-                            v-model="page"
-                            :length="pageCount"
-                        ></v-pagination>
+                        <v-pagination v-model="page" :length="pageCount"></v-pagination>
                     </div>
                 </v-card>
             </template>

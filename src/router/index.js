@@ -106,6 +106,20 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '*',
+    components:{
+      page: RootLogin
+    },
+    children:[
+      {
+        path:'',
+        components:{
+          appbar: LoginBar
+        }
+      }
+    ]
   }
 ]
 

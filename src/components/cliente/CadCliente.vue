@@ -1,8 +1,8 @@
 <template>
-    <main class="main mt-5" id="main">
+    <main class="main" id="main">
         <div class="container">
             <h1 class="title">Cadastrar Cliente</h1>
-            <form class="row g-3 mt-5">
+            <form class="row g-3">
                 <div class="col-md-6">
                     <label for="nome_cliente" class="form-label">Nome:</label>
                     <v-text-field type="text" id="nome_cliente" outlined dense spellcheck="false"
@@ -70,9 +70,6 @@ export default {
         shortNome(){
             return this.nome.length < 3
         },
-        noTelefone(){
-            return this.telefone == ''
-        },
         shortTelefone(){
             if(this.telefone.length > 0){
                 return this.telefone.length < 14
@@ -90,9 +87,6 @@ export default {
             }else{
                 return this.fantasia.length > 0
             }
-        },
-        noAtivo(){
-            return this.ativo == null
         },
         rules(){
             return this.$store.getters.rules
